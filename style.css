@@ -73,7 +73,7 @@ button:hover {
 .operand,
 .zero,
 .decimal {
-  background-color: rgb(255, 120, 21);
+  background-color: #ff7815;
 }
 
 .operand:hover,
@@ -95,13 +95,13 @@ button:hover {
 .clear,
 .sign,
 .percent {
-  background-color: rgb(15, 167, 95);
+  background-color: #2da8ee;
 }
 
 .clear:hover,
 .sign:hover,
 .percent:hover {
-  background-color: rgb(14, 179, 7);
+  background-color: #55b5ec;
 }
 
 /* * Footer Section */
