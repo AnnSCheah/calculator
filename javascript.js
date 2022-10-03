@@ -23,6 +23,14 @@ clearBtn.addEventListener("click", clear);
 const signBtn = document.querySelector(".sign");
 signBtn.addEventListener("click", changeSign);
 
+const bckSpace = document.addEventListener("keydown", backspaceKey);
+
+// TODO Delete this function once the project is done.
+const button = document.addEventListener("keydown", function (event) {
+  const key = event.key;
+  console.log(key);
+});
+
 // * Operator Event Listeners
 const addBtn = document.querySelector("button[value='plus']");
 addBtn.addEventListener("click", () => {
@@ -100,10 +108,24 @@ function selectOperator(operateSign) {
   //display.textContent = secondNumber;
 }
 
-// TODO Handle the logic for answers larger than 9 digits to either a rounded figure or error message
+function backspaceKey(event) {
+  const key = event.key;
+  if (key == "Backspace") {
+    // * Stops the function when the display is 0
+    if (display.textContent == "0") return;
+    // * Change display to 0 if there is only one digit
+    else if (display.textContent.length == 1)
+      return (display.textContent = "0");
+
+    display.textContent = display.textContent.slice(0, -1);
+  }
+}
+
 function calculate() {
   secondNumber = display.textContent;
   display.textContent = operate(operator, firstNumber, secondNumber);
+  if (display.textContent.length > 9)
+    display.textContent = parseFloat(display.textContent).toExponential(2);
   firstNumber = display.textContent;
   secondNumber = 0;
 }
@@ -126,5 +148,6 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+  if (b == 0) return "(?____?)";
   return a / b;
 }
