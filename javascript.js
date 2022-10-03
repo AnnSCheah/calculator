@@ -69,11 +69,11 @@ equalsBtn.addEventListener("click", calculate);
 
 // * Function that shows the operand in the display
 function input() {
-  if (display.textContent.length >= 9) return; // * Limits the display to 9 digits
-
   if (operatorActive) {
     operatorActive = false;
     display.textContent = this.value;
+  } else if (display.textContent.length >= 9) {
+    return; // * Limits the display to 9 digits
   } else if (display.textContent != 0 || display.textContent.includes(".")) {
     display.textContent = display.textContent + this.value; // * Append the next input to the back instead of overwriting the current one
   } else {
