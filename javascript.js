@@ -11,7 +11,16 @@ display.textContent = firstNumber; // * Display defaults to first number
 // * Operand and functionality buttons (clear, decimal, sign)
 const numbers = document.querySelectorAll(".operand");
 numbers.forEach((number) => {
-  number.addEventListener("click", input);
+  number.addEventListener("click", () => {
+    input(number.value);
+  });
+  // * Keyboard support
+  document.addEventListener("keydown", function (event) {
+    const key = event.key;
+    if (key == number.value) {
+      input(number.value);
+    }
+  });
 });
 
 const decimal = document.querySelector(".decimal");
@@ -23,13 +32,13 @@ clearBtn.addEventListener("click", clear);
 const signBtn = document.querySelector(".sign");
 signBtn.addEventListener("click", changeSign);
 
-const bckSpace = document.addEventListener("keydown", backspaceKey);
+document.addEventListener("keydown", backspaceKey);
 
 // TODO Delete this function once the project is done.
-const button = document.addEventListener("keydown", function (event) {
-  const key = event.key;
-  console.log(key);
-});
+// const button = document.addEventListener("keydown", function (event) {
+//   const key = event.key;
+//   console.log(key);
+// });
 
 // * Operator Event Listeners
 const addBtn = document.querySelector("button[value='plus']");
@@ -68,16 +77,16 @@ const equalsBtn = document.querySelector("button[value='equal']");
 equalsBtn.addEventListener("click", calculate);
 
 // * Function that shows the operand in the display
-function input() {
+function input(value) {
   if (operatorActive) {
     operatorActive = false;
-    display.textContent = this.value;
+    display.textContent = value;
   } else if (display.textContent.length >= 9) {
     return; // * Limits the display to 9 digits
   } else if (display.textContent != 0 || display.textContent.includes(".")) {
-    display.textContent = display.textContent + this.value; // * Append the next input to the back instead of overwriting the current one
+    display.textContent = display.textContent + value; // * Append the next input to the back instead of overwriting the current one
   } else {
-    display.textContent = this.value;
+    display.textContent = value;
   }
 }
 
@@ -122,6 +131,11 @@ function backspaceKey(event) {
 }
 
 function calculate() {
+  if (operator == "") {
+    display.textContent = "ERROR";
+    return;
+  }
+  operatorActive = true;
   secondNumber = display.textContent;
   display.textContent = operate(operator, firstNumber, secondNumber);
   if (display.textContent.length > 9)

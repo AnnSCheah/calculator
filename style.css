@@ -73,7 +73,7 @@ button:hover {
 .operand,
 .zero,
 .decimal {
-  background-color: #ff7815;
+  background-color: #ffad73;
 }
 
 .operand:hover,
@@ -84,7 +84,7 @@ button:hover {
 
 .operator,
 .equal {
-  background-color: rgb(69, 69, 117);
+  background-color: rgb(136, 136, 189);
 }
 
 .operator:hover,
@@ -95,7 +95,7 @@ button:hover {
 .clear,
 .sign,
 .percent {
-  background-color: #2da8ee;
+  background-color: #76c2ee;
 }
 
 .clear:hover,
