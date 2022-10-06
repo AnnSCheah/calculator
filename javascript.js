@@ -25,6 +25,13 @@ numbers.forEach((number) => {
 
 const decimal = document.querySelector(".decimal");
 decimal.addEventListener("click", addDecimal);
+// * Keyboard support
+document.addEventListener("keydown", function (event) {
+  const key = event.key;
+  if (key == ".") {
+    addDecimal();
+  }
+});
 
 const clearBtn = document.querySelector(".clear");
 clearBtn.addEventListener("click", clear);
@@ -41,11 +48,20 @@ document.addEventListener("keydown", backspaceKey);
 // });
 
 // * Operator Event Listeners
+const operators = document.querySelectorAll(".operator");
+function resetOperatorColor() {
+  operators.forEach((op) => {
+    op.style.backgroundColor = "rgb(136, 136, 189)";
+  });
+}
+
 const addBtn = document.querySelector("button[value='plus']");
 addBtn.addEventListener("click", () => {
   if (operator != "") {
     calculate();
   }
+  resetOperatorColor();
+  addBtn.style.backgroundColor = "rgb(93, 76, 140)";
   selectOperator(add);
 });
 
@@ -54,6 +70,8 @@ subtractBtn.addEventListener("click", () => {
   if (operator != "") {
     calculate();
   }
+  resetOperatorColor();
+  subtractBtn.style.backgroundColor = "rgb(93, 76, 140)";
   selectOperator(subtract);
 });
 
@@ -62,6 +80,8 @@ multiplyBtn.addEventListener("click", () => {
   if (operator != "") {
     calculate();
   }
+  resetOperatorColor();
+  multiplyBtn.style.backgroundColor = "rgb(93, 76, 140)";
   selectOperator(multiply);
 });
 
@@ -70,6 +90,8 @@ divideBtn.addEventListener("click", () => {
   if (operator != "") {
     calculate();
   }
+  resetOperatorColor();
+  divideBtn.style.backgroundColor = "rgb(93, 76, 140)";
   selectOperator(divide);
 });
 
@@ -103,6 +125,7 @@ function clear() {
   operator = "";
 
   display.textContent = firstNumber;
+  resetOperatorColor();
 }
 
 function changeSign() {
